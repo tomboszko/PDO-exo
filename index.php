@@ -65,22 +65,36 @@
 // N'afficher que les clients possédant une carte de fidélité.
 
 
+// try {
+//     $pdo = new PDO('mysql:host=localhost;dbname=colyseum', 'toms', 'root');
+//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+//     $stmt = $pdo->query('SELECT * FROM clients WHERE card = 1');
+
+//     while ($row = $stmt->fetch()) {
+//         echo $row['lastName'] . ', ' . $row['firstName'] . ', ' . $row['birthDate'] . '<br>';
+//     }
+// } catch (PDOException $e) {
+//     echo 'Connection failed: ' . $e->getMessage();
+// }
+
+
+// Exercice 5
+// Afficher uniquement le nom et le prénom de tous les clients dont le nom commence par la lettre "M".
+
 try {
     $pdo = new PDO('mysql:host=localhost;dbname=colyseum', 'toms', 'root');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $pdo->query('SELECT * FROM clients WHERE card = 1');
+    $stmt = $pdo->query("SELECT lastName, firstName FROM clients WHERE lastName LIKE 'M%'");
 
     while ($row = $stmt->fetch()) {
-        echo $row['lastName'] . ', ' . $row['firstName'] . ', ' . $row['birthDate'] . '<br>';
+        echo $row['lastName'] . ', ' . $row['firstName'] . '<br>';
     }
 } catch (PDOException $e) {
     echo 'Connection failed: ' . $e->getMessage();
 }
 
-
-// Exercice 5
-// Afficher uniquement le nom et le prénom de tous les clients dont le nom commence par la lettre "M".
 
 // Les afficher comme ceci :
 
