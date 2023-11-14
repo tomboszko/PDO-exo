@@ -1,4 +1,6 @@
 CREATE DATABASE colyseum CHARACTER SET 'utf8';
+GRANT ALL PRIVILEGES ON colyseum.* TO 'toms'@'localhost';
+FLUSH PRIVILEGES;
 
 USE colyseum;
 
