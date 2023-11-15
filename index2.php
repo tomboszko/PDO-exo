@@ -432,10 +432,46 @@ Après les formulaires, ajouter un bouton supprimer et supprimer toutes ces rés
 </form> -->
 
 
-Exercice 9
-Afficher autant de formulaires que de billets appartenant aux réservations 24 ou 25. Après les formulaires, ajouter un bouton supprimer et supprimer tous ces billets. (Voir image fournie)
+<!-- Exercice 9
+Afficher autant de formulaires que de billets appartenant aux réservations 24 ou 25. 
+Après les formulaires, ajouter un bouton supprimer et supprimer tous ces billets. 
+(Voir image fournie) -->
+
+<?php
+// $tickets = [];
+
+// try {
+//     $pdo = new PDO('mysql:host=localhost;dbname=colyseum', 'toms', 'root');
+//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+//     // Fetch all tickets for bookings with ID 24 or 25
+//     $stmt = $pdo->prepare("SELECT * FROM tickets WHERE bookingsId= 24 OR bookingsId= 25");
+//     $stmt->execute();
+//     $tickets = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//     // Handle ticket deletion
+//     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete"])) {
+//         $stmt = $pdo->prepare("DELETE FROM tickets WHERE bookingsId= 24 OR bookingsId= 25");
+//         $stmt->execute();
+
+//         echo "Billets supprimés avec succès.";
+//     }
+// } catch (PDOException $e) {
+//     echo 'Connection failed: ' . $e->getMessage();
+// }
+?>
 
 
+<?php foreach ($tickets as $ticket): ?>
+    <!-- <form action="index2.php" method="post">
+        <h2>Billet <?= $ticket['id'] ?></h2>
+        Booking ID: <input type="number" name="bookingId" value="<?= $ticket['bookingId'] ?>"><br>
+    </form> -->
+<?php endforeach; ?>
+
+<!-- <form action="index2.php" method="post">
+    <input type="submit" name="delete" value="Supprimer tous les billets">
+</form>
 
 </body>
-</html>
+</html> -->
