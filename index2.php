@@ -266,33 +266,33 @@ Modifier la date du spectacle : il est repoussé au 1er janvier 2017 à 21h. -->
 
 
 
-Exercice 6
+<!-- Exercice 6
 Créer un formulaire permettant de modifier un client. 
-Afficher les informations du client n°5. Modifier son nom et son prénom : il s'appellera Nicolas Monteiro.
+Afficher les informations du client n°5. Modifier son nom et son prénom : il s'appellera Nicolas Monteiro. -->
 
 
 <?php
-$selectedClient = null;
-$clients = [];
+// $selectedClient = null;
+// $clients = [];
 
-try {
-    $pdo = new PDO('mysql:host=localhost;dbname=colyseum', 'toms', 'root');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// try {
+//     $pdo = new PDO('mysql:host=localhost;dbname=colyseum', 'toms', 'root');
+//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $pdo->prepare("SELECT id, lastName, firstName FROM clients ORDER BY lastName");
-    $stmt->execute();
-    $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//     $stmt = $pdo->prepare("SELECT id, lastName, firstName FROM clients ORDER BY lastName");
+//     $stmt->execute();
+//     $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["clientId"])) {
-        $stmt = $pdo->prepare("SELECT * FROM clients WHERE id = ?");
-        $stmt->execute([$_POST["clientId"]]);
-        $selectedClient = $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-} catch (PDOException $e) {
-    echo 'Connection failed: ' . $e->getMessage();
-}
+//     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["clientId"])) {
+//         $stmt = $pdo->prepare("SELECT * FROM clients WHERE id = ?");
+//         $stmt->execute([$_POST["clientId"]]);
+//         $selectedClient = $stmt->fetch(PDO::FETCH_ASSOC);
+//     }
+// } catch (PDOException $e) {
+//     echo 'Connection failed: ' . $e->getMessage();
+// }
 ?>
-<form action="index2.php" method="post">
+<!-- <form action="index2.php" method="post">
     Client: 
     <select name="clientId" onchange="this.form.submit()">
     <?php foreach ($clients as $client): ?>
@@ -307,12 +307,20 @@ try {
     <input type="submit" value="Modifier">
 </form>
 </body>
-</html>
+</html> -->
 
 
 
 Exercice 7
-Créer deux formulaires contenant tous les champs nécessaires à la création ou modification des clients. Afficher les informations des clients n°24 et 25. Les supprimer grâce à un bouton supprimer que vous aurez ajouté. (Voir image fournie)
+Créer deux formulaires contenant tous les champs nécessaires à la création ou modification des clients. 
+Afficher les informations des clients n°24 et 25. 
+Les supprimer grâce à un bouton supprimer que vous aurez ajouté. 
+(Voir image fournie)
+
+
+
+
+
 
 Exercice 8
 Afficher autant de formulaires que de réservations dont l'id client est 24 ou 25. Après les formulaires, ajouter un bouton supprimer et supprimer toutes ces réservations. (Voir image fournie)
