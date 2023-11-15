@@ -156,6 +156,50 @@ Créer un formulaire comprenant les champs : nom, prénom, date de naissance, ca
 Dans ce formulaire, afficher les information de Gabriel Perry. Modifier sa date de naissance : il est né le 9 avril 1994.
 
 
+<!DOCTYPE html>
+<html>
+<body>
+
+
+<?php
+$selectedClient = null;
+$clients = [];
+
+try {
+    $pdo = new PDO('mysql:host=localhost;dbname=colyseum', 'toms', 'root');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    $stmt = $pdo->prepare("SELECT id, lastName, firstName FROM clients ORDER BY lastName");
+    $stmt->execute();
+    $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["clientId"])) {
+        $stmt = $pdo->prepare("SELECT * FROM clients WHERE id = ?");
+        $stmt->execute([$_POST["clientId"]]);
+        $selectedClient = $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+} catch (PDOException $e) {
+    echo 'Connection failed: ' . $e->getMessage();
+}
+?>
+
+<form action="index2.php" method="post">
+    Client: 
+    <select name="clientId" onchange="this.form.submit()">
+        <?php foreach ($clients as $client): ?>
+            <option value="<?= $client['id'] ?>"><?= $client['lastName'] . ' ' . $client['firstName'] ?></option>
+        <?php endforeach; ?>
+    </select><br>
+    Nom: <input type="text" name="lastName" value="<?= $selectedClient ? $selectedClient['lastName'] : '' ?>"><br>
+    Prénom: <input type="text" name="firstName" value="<?= $selectedClient ? $selectedClient['firstName'] : '' ?>"><br>
+    Date de naissance: <input type="date" name="birthDate" value="<?= $selectedClient ? $selectedClient['birthDate'] : '' ?>"><br>
+    Carte de fidélité: <input type="checkbox" name="card" value="1" <?= $selectedClient && $selectedClient['card'] ? 'checked' : '' ?>><br>
+    Numéro de carte de fidélité: <input type="text" name="cardNumber" value="<?= $selectedClient && $selectedClient['card'] ? $selectedClient['cardNumber'] : '' ?>"><br>
+    <input type="submit" value="Modifier">
+</form>
+</body>
+</html>
+
 
 
 Exercice 5
