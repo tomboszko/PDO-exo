@@ -151,14 +151,124 @@ Ajouter le spectacle "I love techno" de David Guetta qui a lieu le 20 septembre 
 
 
 
-Exercice 4
+<!-- Exercice 4
 Créer un formulaire comprenant les champs : nom, prénom, date de naissance, carte de fidélité (case à cocher) et numéro de carte de fidélité. Ce formulaire devra permettre de modifier un client.
-Dans ce formulaire, afficher les information de Gabriel Perry. Modifier sa date de naissance : il est né le 9 avril 1994.
+Dans ce formulaire, afficher les information de Gabriel Perry. Modifier sa date de naissance : il est né le 9 avril 1994. -->
 
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
-<body>
+<body> -->
+
+
+<?php
+// $selectedClient = null;
+// $clients = [];
+
+// try {
+//     $pdo = new PDO('mysql:host=localhost;dbname=colyseum', 'toms', 'root');
+//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+//     $stmt = $pdo->prepare("SELECT id, lastName, firstName FROM clients ORDER BY lastName");
+//     $stmt->execute();
+//     $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["clientId"])) {
+//         $stmt = $pdo->prepare("SELECT * FROM clients WHERE id = ?");
+//         $stmt->execute([$_POST["clientId"]]);
+//         $selectedClient = $stmt->fetch(PDO::FETCH_ASSOC);
+//     }
+// } catch (PDOException $e) {
+//     echo 'Connection failed: ' . $e->getMessage();
+// }
+?>
+
+<!-- <form action="index2.php" method="post">
+    Client: 
+    <select name="clientId" onchange="this.form.submit()">
+        <?php foreach ($clients as $client): ?>
+            <option value="<?= $client['id'] ?>"><?= $client['lastName'] . ' ' . $client['firstName'] ?></option>
+        <?php endforeach; ?>
+    </select><br>
+    Nom: <input type="text" name="lastName" value="<?= $selectedClient ? $selectedClient['lastName'] : '' ?>"><br>
+    Prénom: <input type="text" name="firstName" value="<?= $selectedClient ? $selectedClient['firstName'] : '' ?>"><br>
+    Date de naissance: <input type="date" name="birthDate" value="<?= $selectedClient ? $selectedClient['birthDate'] : '' ?>"><br>
+    Carte de fidélité: <input type="checkbox" name="card" value="1" <?= $selectedClient && $selectedClient['card'] ? 'checked' : '' ?>><br>
+    Numéro de carte de fidélité: <input type="text" name="cardNumber" value="<?= $selectedClient && $selectedClient['card'] ? $selectedClient['cardNumber'] : '' ?>"><br>
+    <input type="submit" value="Modifier">
+</form>
+</body>
+</html> -->
+
+
+
+<!-- Exercice 5
+Créer un formulaire permettant de modifier un spectacle. 
+Afficher les informations de Vestibulum accumsan. 
+Modifier la date du spectacle : il est repoussé au 1er janvier 2017 à 21h. -->
+
+
+<!-- <!DOCTYPE html>
+<html>
+<body> -->
+
+<?php
+// $selectedShow = null;
+// $shows = [];
+
+// try {
+//     $pdo = new PDO('mysql:host=localhost;dbname=colyseum', 'toms', 'root');
+//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+//     $stmt = $pdo->prepare("SELECT id, title, performer, date, startTime FROM shows ORDER BY title");
+//     $stmt->execute();
+//     $shows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["showId"])) {
+//         $stmt = $pdo->prepare("SELECT * FROM shows WHERE id = ?");
+//         $stmt->execute([$_POST["showId"]]);
+//         $selectedShow = $stmt->fetch(PDO::FETCH_ASSOC);
+//     }
+
+//     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["title"])) {
+//         $title = $_POST["title"];
+//         $performer = $_POST["performer"];
+//         $date = $_POST["date"];
+//         $startTime = $_POST["startTime"];
+//         $showId = $_POST["showId"];
+
+//         $stmt = $pdo->prepare("UPDATE shows SET title = ?, performer = ?, date = ?, startTime = ? WHERE id = ?");
+//         $stmt->execute([$title, $performer, $date, $startTime, $showId]);
+
+//         echo "Spectacle modifié avec succès.";
+//     }
+// } catch (PDOException $e) {
+//     echo 'Connection failed: ' . $e->getMessage();
+// }
+?>
+
+<!-- <form action="index2.php" method="post">
+    Spectacle: 
+    <select name="showId" onchange="this.form.submit()">
+        <?php foreach ($shows as $show): ?>
+            <option value="<?= $show['id'] ?>"><?= $show['title'] ?></option>
+        <?php endforeach; ?>
+    </select><br>
+    Titre: <input type="text" name="title" value="<?= $selectedShow ? $selectedShow['title'] : '' ?>"><br>
+    Performer: <input type="text" name="performer" value="<?= $selectedShow ? $selectedShow['performer'] : '' ?>"><br>
+    Date: <input type="date" name="date" value="<?= $selectedShow ? $selectedShow['date'] : '' ?>"><br>
+    Heure de début: <input type="time" name="startTime" value="<?= $selectedShow ? $selectedShow['startTime'] : '' ?>"><br>
+    <input type="submit" value="Modifier">
+</form>
+
+</body>
+</html> -->
+
+
+
+Exercice 6
+Créer un formulaire permettant de modifier un client. 
+Afficher les informations du client n°5. Modifier son nom et son prénom : il s'appellera Nicolas Monteiro.
 
 
 <?php
@@ -182,11 +292,10 @@ try {
     echo 'Connection failed: ' . $e->getMessage();
 }
 ?>
-
 <form action="index2.php" method="post">
     Client: 
     <select name="clientId" onchange="this.form.submit()">
-        <?php foreach ($clients as $client): ?>
+    <?php foreach ($clients as $client): ?>
             <option value="<?= $client['id'] ?>"><?= $client['lastName'] . ' ' . $client['firstName'] ?></option>
         <?php endforeach; ?>
     </select><br>
@@ -201,12 +310,6 @@ try {
 </html>
 
 
-
-Exercice 5
-Créer un formulaire permettant de modifier un spectacle. Afficher les informations de Vestibulum accumsan. Modifier la date du spectacle : il est repoussé au 1er janvier 2017 à 21h.
-
-Exercice 6
-Créer un formulaire permettant de modifier un client. Afficher les informations du client n°5. Modifier son nom et son prénom : il s'appellera Nicolas Monteiro.
 
 Exercice 7
 Créer deux formulaires contenant tous les champs nécessaires à la création ou modification des clients. Afficher les informations des clients n°24 et 25. Les supprimer grâce à un bouton supprimer que vous aurez ajouté. (Voir image fournie)
