@@ -311,69 +311,69 @@ Afficher les informations du client n°5. Modifier son nom et son prénom : il s
 
 
 
-Exercice 7
+<!-- Exercice 7
 Créer deux formulaires contenant tous les champs nécessaires à la création ou modification des clients. 
 Afficher les informations des clients n°24 et 25. 
 Les supprimer grâce à un bouton supprimer que vous aurez ajouté. 
-(Voir image fournie)
+(Voir image fournie) -->
 
 
-<!-- Form for creating a client -->
-<form action="index2.php" method="post">
+
+<!-- <form action="index2.php" method="post">
     <h2>Créer un client</h2>
     Nom: <input type="text" name="name"><br>
     Prénom: <input type="text" name="firstName"><br>
     Email: <input type="email" name="email"><br>
     <input type="submit" value="Créer">
-</form>
+</form> -->
 
-<!-- Form for modifying a client --><?php
-$selectedClient = null;
-$clients = [];
+<?php
+// $selectedClient = null;
+// $clients = [];
 
-try {
-    $pdo = new PDO('mysql:host=localhost;dbname=colyseum', 'toms', 'root');
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// try {
+//     $pdo = new PDO('mysql:host=localhost;dbname=colyseum', 'toms', 'root');
+//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Fetch all clients
-    $stmt = $pdo->prepare("SELECT id, name, firstName, email FROM clients ORDER BY name");
-    $stmt->execute();
-    $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//     // Fetch all clients
+//     $stmt = $pdo->prepare("SELECT id, name, firstName, email FROM clients ORDER BY name");
+//     $stmt->execute();
+//     $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Handle client creation
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["name"])) {
-        $name = $_POST["name"];
-        $firstName = $_POST["firstName"];
-        $email = $_POST["email"];
+//     // Handle client creation
+//     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["name"])) {
+//         $name = $_POST["name"];
+//         $firstName = $_POST["firstName"];
+//         $email = $_POST["email"];
 
-        $stmt = $pdo->prepare("INSERT INTO clients (name, firstName, email) VALUES (?, ?, ?)");
-        $stmt->execute([$name, $firstName, $email]);
+//         $stmt = $pdo->prepare("INSERT INTO clients (name, firstName, email) VALUES (?, ?, ?)");
+//         $stmt->execute([$name, $firstName, $email]);
 
-        echo "Client créé avec succès.";
-    }
+//         echo "Client créé avec succès.";
+//     }
 
-    // Handle client modification
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["clientId"])) {
-        $stmt = $pdo->prepare("SELECT * FROM clients WHERE id = ?");
-        $stmt->execute([$_POST["clientId"]]);
-        $selectedClient = $stmt->fetch(PDO::FETCH_ASSOC);
+//     // Handle client modification
+//     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["clientId"])) {
+//         $stmt = $pdo->prepare("SELECT * FROM clients WHERE id = ?");
+//         $stmt->execute([$_POST["clientId"]]);
+//         $selectedClient = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        if (isset($_POST["name"])) {
-            $name = $_POST["name"];
-            $firstName = $_POST["firstName"];
-            $email = $_POST["email"];
+//         if (isset($_POST["name"])) {
+//             $name = $_POST["name"];
+//             $firstName = $_POST["firstName"];
+//             $email = $_POST["email"];
 
-            $stmt = $pdo->prepare("UPDATE clients SET name = ?, firstName = ?, email = ? WHERE id = ?");
-            $stmt->execute([$name, $firstName, $email, $_POST["clientId"]]);
+//             $stmt = $pdo->prepare("UPDATE clients SET name = ?, firstName = ?, email = ? WHERE id = ?");
+//             $stmt->execute([$name, $firstName, $email, $_POST["clientId"]]);
 
-            echo "Client modifié avec succès.";
-        }
-    }
-} catch (PDOException $e) {
-    echo 'Connection failed: ' . $e->getMessage();
-}
+//             echo "Client modifié avec succès.";
+//         }
+//     }
+// } catch (PDOException $e) {
+//     echo 'Connection failed: ' . $e->getMessage();
+// }
 ?>
-<form action="index2.php" method="post">
+<!-- <form action="index2.php" method="post">
     <h2>Modifier un client</h2>
     Client: 
     <select name="clientId" onchange="this.form.submit()">
@@ -385,15 +385,57 @@ try {
     Prénom: <input type="text" name="firstName" value="<?= $selectedClient ? $selectedClient['firstName'] : '' ?>"><br>
     Email: <input type="email" name="email" value="<?= $selectedClient ? $selectedClient['email'] : '' ?>"><br>
     <input type="submit" value="Modifier">
-</form>
+</form> -->
 
 
 
-Exercice 8
-Afficher autant de formulaires que de réservations dont l'id client est 24 ou 25. Après les formulaires, ajouter un bouton supprimer et supprimer toutes ces réservations. (Voir image fournie)
+<!-- Exercice 8
+Afficher autant de formulaires que de réservations dont l'id client est 24 ou 25. 
+Après les formulaires, ajouter un bouton supprimer et supprimer toutes ces réservations. 
+(Voir image fournie) -->
+
+<?php
+// $bookings = [];
+
+// try {
+//     $pdo = new PDO('mysql:host=localhost;dbname=colyseum', 'toms', 'root');
+//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+//     // Fetch all bookings for clients with ID 24 or 25
+//     $stmt = $pdo->prepare("SELECT * FROM bookings WHERE clientId = 24 OR clientId = 25");
+//     $stmt->execute();
+//     $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+//     // Handle booking deletion
+//     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["delete"])) {
+//         $stmt = $pdo->prepare("DELETE FROM bookings WHERE clientId = 24 OR clientId = 25");
+//         $stmt->execute();
+
+//         echo "Réservations supprimées avec succès.";
+//     }
+// } catch (PDOException $e) {
+//     echo 'Connection failed: ' . $e->getMessage();
+// }
+?>
+
+<!-- Display a form for each booking -->
+<?php foreach ($bookings as $booking): ?>
+    <!-- <form action="index2.php" method="post">
+        <h2>Réservation <?= $booking['id'] ?></h2>
+        Client ID: <input type="number" name="clientId" value="<?= $booking['clientId'] ?>"><br>
+    </form> -->
+<?php endforeach; ?>
+
+
+<!-- <form action="index2.php" method="post">
+    <input type="submit" name="delete" value="Supprimer toutes les réservations">
+</form> -->
+
 
 Exercice 9
 Afficher autant de formulaires que de billets appartenant aux réservations 24 ou 25. Après les formulaires, ajouter un bouton supprimer et supprimer tous ces billets. (Voir image fournie)
+
+
 
 </body>
 </html>
